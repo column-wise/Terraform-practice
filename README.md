@@ -172,7 +172,7 @@ Terraform은 복잡한 인프라를 코드로 안전하게 정의하고, 추적�
 
 ## 2. AWS 인증 정보 설정 (`~/.aws/credentials` 파일에 인증 정보 저장)
 
-AWS CLI를 먼저 설치하고 아래 명령어로 설정:
+[AWS CLI](https://docs.aws.amazon.com/ko_kr/cli/latest/userguide/getting-started-install.html)를 먼저 설치하고 아래 명령어로 설정:
 
 ```bash
 aws configure
