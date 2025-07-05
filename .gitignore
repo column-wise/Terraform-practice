@@ -33,3 +33,26 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+# Terraform plan binary files
+*.tfplan
+
+# Terraform apply plan binary (예: terraform plan -out=plan.tfplan)
+*.tfplan*
+
+# 상태 파일 백업
+*.backup
+
+# Terraform lock file (보안상 민감하지 않지만 팀 공유가 필요 없다면 무시 가능)
+# 하지만 대부분은 Git에 포함시킵니다. 주석 해제 여부는 상황에 따라 선택하세요.
+# terraform.lock.hcl
+
+# IDE 및 편집기 관련 (optional)
+.vscode/
+.idea/
+*.swp
+
+# 로컬 실습 중 생성된 결과/출력 파일
+*.log
+output.txt
+plan.out
