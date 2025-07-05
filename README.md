@@ -187,6 +187,12 @@ Default region name [None]: ap-northeast-2
 Default output format [None]: json
 ```
 
+입력 후
+```bash
+aws sts get-caller-identity
+```
+명령어로 확인.
+
 파일은
 
 ```bash
