@@ -415,11 +415,11 @@ variable "admin_ip" {
 
 ```hcl
 terraform {
-  required_version = ">= 1.12.2"
+  required_version = ">=1.12.2"
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = ">~ 5.0"
+      version = "~> 5.0"
     }
   }
 }
@@ -428,7 +428,6 @@ provider "aws" {
   region = "ap-northeast-2"
 }
 
-# data block으로 01-vpc 에서 apply한 리소스 참조
 data "aws_vpc" "main" {
   filter {
     name   = "tag:Name"
@@ -452,7 +451,7 @@ resource "aws_security_group" "web" {
   }
 
   # HTTPS 접근 허용
-  ingress = {
+  ingress {
     description = "HTTPS from internet"
     from_port   = 443
     to_port     = 443
@@ -567,6 +566,7 @@ resource "aws_security_group" "db" {
     Type        = "Database"
   }
 }
+
 ```
 
 3. **02-security-group/outputs.tf** (결과값 출력)
