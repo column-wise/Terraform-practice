@@ -42,6 +42,7 @@ terraform.rc
 
 # 상태 파일 백업
 *.backup
+.DS_Store
 
 # Terraform lock file (보안상 민감하지 않지만 팀 공유가 필요 없다면 무시 가능)
 # 하지만 대부분은 Git에 포함시킵니다. 주석 해제 여부는 상황에 따라 선택하세요.
