@@ -1,0 +1,29 @@
+variable "project_name" {
+    description  = "프로젝트 이름"
+    type         = string
+    default      = "terraform-practice"
+}
+
+variable "environment" {
+    description  = "환경 (dev, staging, prod)"
+    type         = string
+    default      = "dev"
+}
+
+variable "instance_type" {
+    description  = "인스턴스 타입"
+    type         = string
+    default      = "t3.micro"
+}
+
+variable "key_pair_name" {
+    description  = "SSH Key Pair 이름"
+    type         = string
+    default      = "terraform-practice-key"
+}
+
+variable "admin_ip" {
+    description  = "관리자 IP (SSH 접근용)"
+    type         = string
+    default      = "0.0.0.0/0" # 실습용, 실제로는 본인 IP 입력
+}
