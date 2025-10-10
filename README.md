@@ -129,36 +129,38 @@ Terraform은 복잡한 인프라를 코드로 안전하게 정의하고, 추적�
 
 # 실습 repo 구조
 
-| 디렉토리                  | 설명                                                                                             |
-| ------------------------- | ------------------------------------------------------------------------------------------------ |
-| **00-provider-setup/**    | Terraform 설치 및 설정, HCL 문법, `init`·`plan`·`apply` 워크플로우, 상태 파일 개념               |
-| **01-vpc/**               | VPC, Public/Private Subnet, 인터넷 게이트웨이, 라우팅 테이블 구성                                |
-| **02-security-group/**    | 인바운드/아웃바운드 보안 그룹 규칙 설계 및 실습                                                  |
-| **03-nat-gateway/**       | NAT 게이트웨이 구성, 프라이빗 서브넷 인터넷 접근 실습                                            |
-| **04-ec2/**               | EC2 인스턴스 프로비저닝, user_data를 이용한 초기화 스크립트 실습                                 |
-| **05-auto-scaling/**      | Auto Scaling Group 생성, Launch Configuration/Template, Scaling Policy 구성                      |
-| **06-load-balancer/**     | ALB/NLB 생성 및 리스너·타겟 그룹 설정, 헬스체크 실습                                             |
-| **07-rds/**               | RDS(MySQL 등) 생성, 파라미터 그룹·백업 설정, 멀티 AZ 구성 실습                                   |
-| **08-s3/**                | S3 버킷 생성, 버전 관리, 접근 정책, 정적 웹호스팅                                                |
-| **09-secrets-manager/**   | AWS Secrets Manager (및 SSM Parameter Store) 연동, 민감 정보 관리                                |
-| **10-acm-ssl/**           | ACM을 이용한 SSL/TLS 인증서 발급·갱신, ELB 및 CloudFront 연동                                    |
-| **11-cloudfront/**        | CloudFront 배포, 오리진 설정, 캐싱 정책, OAI 실습                                                |
-| **12-lambda/**            | Lambda 함수 생성·배포, IAM 역할 연결, 환경 변수 관리                                             |
-| **13-api-gateway/**       | API Gateway 설정, Lambda/HTTP 통합, 스테이지·도메인 설정                                         |
-| **14-ecr-and-ecs/**       | ECR에 Docker 이미지 푸시, ECS Fargate 서비스 배포                                                |
-| **15-cloudwatch/**        | 로그 수집(CW Logs), 메트릭, 대시보드, 알람 설정                                                  |
-| **16-iam/**               | IAM 사용자·역할·정책, 정책 문법, 권한 위임 패턴                                                  |
-| **17-route53/**           | Route 53 레코드 관리, ALIAS 레코드, 헬스체크 연동                                                |
-| **18-waf/**               | WAF 웹 ACL 생성, 리전·Global 배포, 규칙 관리                                                     |
-| **19-bastion-host/**      | Bastion Host 구성, Session Manager 연동, SSH 접근 통제                                           |
-| **20-backup-strategy/**   | EBS 스냅샷, RDS 백업 정책, S3 버전 관리, 수명 주기 설정                                          |
-| **21-modules/**           | 공통 리소스 모듈화, 입력·출력 변수 설계, Terratest 모듈 테스트                                   |
-| **22-remote-backend/**    | S3 + DynamoDB를 이용한 상태 파일 원격 저장소 구성                                                |
-| **23-ci-cd-pipeline/**    | GitHub Actions / Terraform Cloud / Atlantis, PR→Plan/Apply 자동화                                |
-| **24-cost-optimization/** | Reserved Instances, Savings Plans, `terraform cost-estimation`, 예산 알람                        |
-| **25-disaster-recovery/** | 멀티 리전 백업, RTO/RPO 설계, 자동 복구 워크플로우                                               |
-| **26-optional-advanced/** | VPC Peering/Transit Gateway, ElastiCache, SQS/SNS, EventBridge, CloudFormation vs Terraform 비교 |
-| **99-examples/**          | 종합 예제: 전체 인프라 구성 (VPC + EC2 + RDS + S3 + ALB + Autoscaling 등)                        |
+| 디렉토리                       | 설명                                                                                                                         |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| **00-provider-setup/**         | Terraform 설치 및 설정, HCL 문법, `init`·`plan`·`apply` 워크플로우, 상태 파일 개념                                           |
+| **01-vpc/**                    | VPC, Public/Private Subnet, 인터넷 게이트웨이, 라우팅 테이블 구성                                                            |
+| **02-security-group/**         | 인바운드/아웃바운드 보안 그룹 규칙 설계 및 실습                                                                              |
+| **03-nat-gateway/**            | NAT 게이트웨이 구성, 프라이빗 서브넷 인터넷 접근 실습                                                                        |
+| **04-ec2/**                    | EC2 인스턴스 프로비저닝, `user_data` 초기화 스크립트 실습                                                                     |
+| **05-basic-modules/**          | 기초 모듈화 도입: `modules/{vpc,security_group,nat_gateway,ec2}` 분리, `environments/dev` 루트에서 **한 번의 apply**로 VPC→SG→NAT→EC2 생성, `outputs`/`variables` 설계, 암묵적 의존성 이해 |
+| **06-auto-scaling/**           | Auto Scaling Group 생성, Launch Template/Configuration, Scaling Policy 구성                                                   |
+| **07-load-balancer/**          | ALB/NLB 생성 및 리스너·타겟 그룹 설정, 헬스체크 실습                                                                         |
+| **08-rds/**                    | RDS(MySQL 등) 생성, 파라미터 그룹·백업 설정, 멀티 AZ 구성 실습                                                               |
+| **09-s3/**                     | S3 버킷 생성, 버전 관리, 접근 정책, 정적 웹호스팅                                                                            |
+| **10-secrets-manager/**        | AWS Secrets Manager (및 SSM Parameter Store) 연동, 민감 정보 관리                                                            |
+| **11-acm-ssl/**                | ACM을 이용한 SSL/TLS 인증서 발급·갱신, ELB 및 CloudFront 연동                                                                |
+| **12-cloudfront/**             | CloudFront 배포, 오리진 설정, 캐싱 정책, OAI 실습                                                                            |
+| **13-lambda/**                 | Lambda 함수 생성·배포, IAM 역할 연결, 환경 변수 관리                                                                         |
+| **14-api-gateway/**            | API Gateway 설정, Lambda/HTTP 통합, 스테이지·도메인 설정                                                                     |
+| **15-ecr-and-ecs/**            | ECR에 Docker 이미지 푸시, ECS Fargate 서비스 배포                                                                            |
+| **16-cloudwatch/**             | 로그 수집(CloudWatch Logs), 메트릭, 대시보드, 알람 설정                                                                     |
+| **17-iam/**                    | IAM 사용자·역할·정책, 정책 문법, 권한 위임 패턴                                                                              |
+| **18-route53/**                | Route 53 레코드 관리, ALIAS 레코드, 헬스체크 연동                                                                           |
+| **19-waf/**                    | WAF 웹 ACL 생성, 리전·Global 배포, 규칙 관리                                                                                 |
+| **20-bastion-host/**           | Bastion Host 구성, Session Manager 연동, SSH 접근 통제                                                                       |
+| **21-backup-strategy/**        | EBS 스냅샷, RDS 백업 정책, S3 버전 관리, 수명 주기 설정                                                                      |
+| **22-advanced-modules/**       | 고급 모듈화 심화: 재사용 가능한 모듈 아키텍처, cross-module 의존 캡슐화, `terraform-docs` 자동 문서화, **Terratest** 단위 테스트, 버전관리(semver)·Registry 퍼블리시, **네트워크/컴퓨트 상태 분리 패턴** |
+| **23-remote-backend/**         | S3 + DynamoDB를 이용한 상태 파일 원격 저장소 구성(락킹)                                                                     |
+| **24-ci-cd-pipeline/**         | GitHub Actions / Terraform Cloud / Atlantis, PR→Plan/Apply 자동화 비교·구현                                                  |
+| **25-cost-optimization/**      | Reserved Instances, Savings Plans, `terraform cost-estimation`/Infracost, 예산 알람                                           |
+| **26-disaster-recovery/**      | 멀티 리전 백업, RTO/RPO 설계, 자동 복구 워크플로우                                                                          |
+| **27-optional-advanced/**      | VPC Peering/Transit Gateway, ElastiCache, SQS/SNS, EventBridge, **CloudFormation & CDK vs Terraform** 비교                  |
+| **99-examples/**               | 종합 예제: 전체 인프라 구성 (VPC + EC2 + RDS + S3 + ALB + Auto Scaling 등)                                                   |
+
 
 <br>
 
